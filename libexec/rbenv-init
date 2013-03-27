@@ -11,7 +11,7 @@ for args in "$@"
 do
   if [ "$args" = "-" ]; then
     print=1
-		shift
+    shift
   fi
 
   if [ "$args" = "--no-rehash" ]; then
@@ -73,7 +73,9 @@ fi
 
 mkdir -p "${RBENV_ROOT}/"{shims,versions}
 
-echo 'export PATH="'${RBENV_ROOT}'/shims:${PATH}"'
+if [[ ":${PATH}:" != *:"${RBENV_ROOT}/shims":* ]]; then
+  echo 'export PATH="'${RBENV_ROOT}'/shims:${PATH}"'
+fi
 
 case "$shell" in
 bash | zsh )
